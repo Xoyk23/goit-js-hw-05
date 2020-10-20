@@ -1,47 +1,30 @@
-/* Callback функция
-
-Функция mapArray(array, cb), принимает 1-м параметром
-array - массив чисел, а вторым параметром cb - функцию
-обратного вызова (callback). Функция mapArray создает новый
-массив numbers и заполняет его числами из массива array
-преобразованными функцией cb.
-
-Оформи создание массива numbers нужной длины используя
-new Array () и необходимый аргумент для задания длины,
-равной длине array.
-
-Напиши функцию обратного вызова addIndex , которая
-принимает два параметра - element и index и возвращает
-число - сумму element и index (сложение).
-
-Напиши функцию обратного вызова subIndex , которая
-принимает два параметра - element и index и возвращает
-число - разность element и index (вычитание).
+/* function-constructor
+Напиши функцию-конструктор Account, которая создает объект со свойствами login и email.
+В prototype функции-конструктора добавь метод getInfo(), 
+который возвращает строку со значениями свойств login и email объекта.
 */
 
-const addIndex = (element, index) => element + index;
+// 1.Cоздаю функцию-коструктор которая принимает параметры login and email
+// 2.Создаю прототипа функции конструктора
 
-const subIndex = (element, index) => element - index;
+// 1.Cоздаю функцию-коструктор которая принимает параметры login and email
+const Account = function (login, email) {
+  this.login = login;
+  this.email = email;
+};
+// 2.Создаю прототипа функции конструктора
 
-function mapArray(array, cb) {
-  'use strict';
+Account.prototype.getInfo = function () {
+  return `login : ${this.login}, email: ${this.email}`;
+};
 
-  const numbers = new Array(array.length);
-  for (let i = 0; i < array.length; i += 1) {
-    const element = array[i];
-    const index = i;
-    numbers[i] = cb(element, index);
-  }
-  return numbers;
-}
+console.log(typeof Account.prototype.getInfo);
+// 'function'
 
-const arr = [1, 2, 3, 4, 5];
+const mango = new Account('Mangozedog', 'mango@dog.woof');
+console.log(mango.getInfo());
+// 'login : Mangozedog, email: mango@dog.woof'
 
-console.log(mapArray(arr, addIndex));
-// [1, 3, 5, 7, 9]
-
-console.log(mapArray(arr, subIndex));
-// [1, 1, 1, 1, 1]
-
-// const superArray = new Array(15)
-// // console.log(superArray.length)
+const poly = new Account('Poly', 'poly@mail.com');
+console.log(poly.getInfo());
+// 'login : Poly, email: poly@mail.com'
